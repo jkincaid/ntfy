@@ -47,6 +47,9 @@ def notify(title, message, icon=icon.ico, **kwargs):
                                        win32con.WM_USER + 20, hicon,
                                        "Balloon tooltip", title, 200, msg))
             win32gui.DestroyWindow(self.hwnd)
+            
+            #allows for successive calls to notify method
+            win32gui.UnregisterClass(classAtom,hinst)
 
         def OnDestroy(self, hwnd, msg, wparam, lparam):
             win32api.PostQuitMessage(0)  # Terminate the app.
